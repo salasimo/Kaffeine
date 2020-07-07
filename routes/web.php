@@ -25,5 +25,7 @@ Route::namespace('User')
     ->prefix('user')
     ->middleware('auth')
     ->group(function () {
-        Route::get('dashboard', 'DashboardController@index')->name('dashboard');
+        Route::resource('dashboard', 'DashboardController');
+        //Route::get('dashboard', 'DashboardController@index')->name('dashboard');
+        //Route::get('dashboard/aggiungidose', 'DashboardController@create')->name('dashboard.create');
     });

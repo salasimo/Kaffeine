@@ -21,7 +21,7 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return view('user.dashboard');
+        return view('user.dashboard.index');
     }
 
     /**
@@ -31,7 +31,9 @@ class DashboardController extends Controller
      */
     public function create()
     {
-        //
+        $drinks = Drink::all();
+
+        return view('user.dashboard.create', compact('drinks'));
     }
 
     /**
@@ -42,7 +44,6 @@ class DashboardController extends Controller
      */
     public function store(Request $request)
     {
-        //
     }
 
     /**
