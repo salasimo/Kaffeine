@@ -21,6 +21,8 @@ class DashboardController extends Controller
      */
     public function index()
     {
+        $userLogged = Auth::id();
+        $doses = Dose::where('user_id', '=', $userLogged)->get();
         return view('user.dashboard.index');
     }
 
@@ -44,6 +46,28 @@ class DashboardController extends Controller
      */
     public function store(Request $request)
     {
+        $data = $request->all();
+
+        $validator = Validator::make($data, [
+            'drink_id' => 'required|exists:drinks,id',
+        ]);
+        //dd($data);
+        if ($validator->fails()) {
+            return redirect()->route('user.dashboard.create')
+                ->withErrors($validator)
+                ->withInput();
+        }
+        $data['user_id'] = Auth::id();
+
+        $dose = new Dose;
+        $dose->fill($data);
+
+        $saved = $dose->save();
+        if (!$saved) {
+            return redirect()->back()->withInput();;
+        }
+
+        return redirect()->route('user.dashboard.index');
     }
 
     /**

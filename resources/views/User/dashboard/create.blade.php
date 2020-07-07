@@ -8,17 +8,22 @@
           @method("POST")
           @csrf
           <div class="form-group">
-            <select class="custom-select">
-              <option selected>Seleziona bevanda</option>
+            <select class="custom-select" name="drink_id">
+              <option value="-1" selected>Seleziona una bevanda</option>
               @foreach ($drinks as $drink)
                 <option value="{{$drink->id}}">{{$drink->type}}</option>
-              @endforeach
-            </select>     
+              @endforeach 
+            </select>   
+            @error('drink_id')
+                <small class="form-text">Seleziona una bevanda per continuare.</small>
+              @enderror 
+            
           </div>
           <div class="form-group">
             <input class="btn btn-primary" type="submit" value="Conferma">
-            </div>
           </div>
+        </form>
+      </div>
     </section>
     
 @endsection
