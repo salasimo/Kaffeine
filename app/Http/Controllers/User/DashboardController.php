@@ -51,13 +51,13 @@ class DashboardController extends Controller
         $validator = Validator::make($data, [
             'drink_id' => 'required|exists:drinks,id',
         ]);
-        //dd($data);
         if ($validator->fails()) {
             return redirect()->route('user.dashboard.create')
                 ->withErrors($validator)
                 ->withInput();
         }
         $data['user_id'] = Auth::id();
+        $data['date'] = Carbon::now('Europe/Rome');
 
         $dose = new Dose;
         $dose->fill($data);

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Dose extends Model
 {
     protected $fillable = [
-        'user_id', 'drink_id'
+        'user_id', 'drink_id', 'date'
     ];
 
     public function user()

@@ -17,6 +17,7 @@ class CreateDosesTable extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained();
             $table->foreignId('drink_id')->constrained();
+            $table->dateTime('date');
             $table->timestamps();
         });
     }
