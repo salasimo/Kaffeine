@@ -12,11 +12,11 @@ class Dose extends Model
 
     public function user()
     {
-        return $this->belongsTo('App/User');
+        return $this->belongsTo('App\User');
     }
 
     public function drink()
     {
-        return $this->belongsTo('App/Drink');
+        return $this->belongsTo('App\Drink');
     }
 }

@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Drink;
 use App\Dose;
-
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Carbon\Carbon;
@@ -22,8 +21,10 @@ class DashboardController extends Controller
     public function index()
     {
         $userLogged = Auth::id();
-        $doses = Dose::where('user_id', '=', $userLogged)->get();
-        return view('user.dashboard.index');
+        $doses = Dose::where('user_id', '=', $userLogged)->orderBy('date', 'DESC')->paginate(5);
+        // $drinks = Drink::all();
+        $todayDoses = Dose::where('user_id', '=', $userLogged)->where('date', Carbon::now('Europe/Rome')->format('d'));
+        return view('user.dashboard.index', ['doses' => $doses]);
     }
 
     /**
@@ -112,6 +113,31 @@ class DashboardController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $dose = Dose::findOrFail($id);
+        $user_id = Auth::id();
+        if ($user_id != $dose->user_id) {
+            abort('404');
+        }
+
+        $dose->delete();
+        $deleted = $dose->delete();
+
+        if (!$deleted) {
+            return redirect()->back(); // aggiungere with status
+        }
+        return redirect()->route('user.dashboard.index');
+    }
+
+    public function stats(Request $request)
+    {
+        $user_id = Auth::id();
+        // $doses = Dose::where('user_id', $user_id)->whereBetween('date', [Carbon::now('Europe/Rome')->startOfWeek(), Carbon::now('Europe/Rome')->endOfWeek()])->get();
+        $dosesOfWeek = [];
+        for ($i = 6; $i >= 0; $i--) {
+            $doseOfTheDay = Dose::where('user_id', $user_id)->whereDate('date', Carbon::now('d')->subDays($i))->join('drinks', 'doses.drink_id', '=', 'drinks.id')->sum('amount');
+            $dosesOfWeek[] = $doseOfTheDay;
+        }
+
+        return response()->json($dosesOfWeek);
     }
 }

@@ -20,6 +20,8 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::get('json-stats', 'User\DashboardController@stats');
+
 Route::namespace('User')
     ->name('user.')
     ->prefix('user')
