@@ -1,0 +1,79 @@
+#page-dashboard {
+    .today-info-box {
+        max-width: 660px;
+        margin: 0 auto;
+        .today-info {
+            text-align: center;
+            padding: 20px;
+            background-color: white;
+            // border: 1px solid coral;
+            border-radius: 20px;
+            p {
+                padding: 0;
+                margin: 0;
+                &.limit-ok {
+                    color: green;
+                }
+                &.limit-over {
+                    color: red;
+                }
+            }
+            span {
+                display: block;
+                font-size: 2em;
+            }
+        }
+    }
+    .add-dose-box {
+        text-align: center;
+        padding: 20px;
+        background-color: white;
+        border-radius: 20px;
+        margin: 30px auto;
+        max-width: 660px;
+    }
+    .canvas-box {
+        max-width: 660px;
+        margin: 0 auto;
+        margin-bottom: 30px;
+        background-color: white;
+        padding: 20px;
+        border-radius: 20px;
+    }
+    .canvas-info-display {
+        display: none;
+        text-align: center;
+        border: 1px solid black;
+        color: black;
+        border-radius: 10px;
+        padding: 10px 20px;
+        margin: 0 auto;
+        opacity: 70%;
+        font-size: 13px;
+        margin-bottom: 30px;
+    }
+
+    section.doses-table {
+        max-width: 660px;
+        margin: 0 auto;
+        background-color: white;
+        padding: 20px;
+        border-radius: 20px;
+        overflow: hidden;
+        h4.title-table {
+            margin-top: 10px;
+        }
+        .no-data-info {
+            text-align: center;
+        }
+    }
+
+    @media screen and (max-width: 667px) {
+        .canvas-box {
+            display: none;
+        }
+        .canvas-info-display {
+            display: block;
+        }
+    }
+}

@@ -1,0 +1,40 @@
+body {
+    background-color: $k-beige;
+}
+
+nav.navbar {
+    background-color: $k-orange !important;
+}
+
+.btn-primary {
+    background-color: $k-orange;
+    border: 1px solid $k-orange;
+    &:hover,
+    &:focus,
+    &:active {
+        background-color: $k-orange-hover;
+        border: 1px solid $k-orange-hover;
+    }
+}
+
+.btn-outline-danger {
+    color: $k-orange;
+    background-color: white;
+    border: 1px solid $k-orange;
+    &:hover {
+        background-color: $k-orange;
+        border: 1px solid $k-orange;
+    }
+}
+.pagination > li > a {
+    background-color: white;
+    color: $k-orange;
+    &:hover {
+        color: $k-orange;
+    }
+}
+
+.pagination > .active > span {
+    background-color: $k-orange !important;
+    border: 1px solid $k-orange !important;
+}

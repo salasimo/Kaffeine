@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
-    <section>
+    <section id="page-create">
       <div class="container">
-        <h2>Aggiungi la quantità di caffeina che hai assunto.</h2>
+        <h2>Seleziona il tipo di bevanda che hai assunto.</h2>
         <form action="{{route('user.dashboard.store')}}" method="POST" enctype="multipart/form-data">
           @method("POST")
           @csrf
-          <div class="form-group">
+          <div class="form-group selection-drink">
             <select class="custom-select" name="drink_id">
               <option value="-1" selected>Seleziona una bevanda</option>
               @foreach ($drinks as $drink)

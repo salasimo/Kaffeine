@@ -1,32 +1,38 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
-      <section>
-        <h2>Tieni sotto controllo la quantità di caffeina che assumi.</h2>
-        <p>Registra ogni tazza di caffè, tè o bevanda ricca di caffeina. Cerca di non superare il limite giornaliero di caffeina consigliato dall'OMS.</p>
-        <a href="{{route('user.dashboard.create')}}">Aggiungi dose di caffeina</a>
-      </section>
-      <section>
-        <div class="col-6">
-          @php
+    <div class="container" id="page-dashboard"">
+      <section class="row today-info-box">
+        <div class="col-5 today-info today-dose">
+          {{-- @php
             $limit = 400;
-            $todayDose = DB::table('doses')->whereDate('date', Carbon\Carbon::today('Europe/Rome'))->join('drinks', 'doses.drink_id', '=', 'drinks.id')->sum('amount'); 
-          @endphp
-          <h4>Oggi hai assunto {{$todayDose}}mg di caffeina</h4>
+            $todayDose = DB::table('doses')->where('user_id', $userLogged)->whereDate('date', Carbon\Carbon::today('Europe/Rome'))->join('drinks', 'doses.drink_id', '=', 'drinks.id')->sum('amount'); 
+          @endphp --}}
+          <p>Oggi hai assunto<span>{{$todayDose}}mg</span>di caffeina</p>
         </div>
-        <div class="col-6">
+        <div class="offset-2 col-5 today-info today-limit">
           @if ($todayDose <= $limit )
-            <h4>Puoi assumerne ancora {{$limit - $todayDose}}mg</h4>
+            <p class="limit-ok">Puoi assumere ancora<span>{{$limit - $todayDose}}mg</span>di caffeina</p>
           @else
-            <h4>Hai superato il limite giornaliero di {{$todayDose - $limit}}mg</h4>
+            <p class="limit-over">Hai superato di<span>{{$todayDose - $limit}}mg</span>il limite giornaliero</p>
           @endif
         </div>
       </section>
-      <input type="text" name="user_id" value="{{Auth::id()}}" hidden>
-      <canvas id="chart" width="300" height="100"></canvas>
-
       <section>
+        <div class="add-dose-box">
+          <p>Registra ogni tazza di caffè, tè o bevanda ricca di caffeina. Cerca di non superare il limite giornaliero di caffeina consigliato dall'OMS.</p>
+          <a class="btn btn-primary" href="{{route('user.dashboard.create')}}">Aggiungi dose di caffeina</a>
+        </div>
+      </section>
+      
+      <input type="text" name="user_id" value="{{Auth::id()}}" hidden>
+      <section class="canvas-info-display">Ruota il tuo dispositivo o allarga la finestra del browser per visualizzare il grafico.</section>
+      <section class="canvas-box">
+        <canvas id="chart"></canvas>
+      </section>
+
+      <section class="doses-table">
+        <h4 class="title-table">Registro della caffeina</h4>
         <table class="table table-sm">
           <thead>
             <tr>
@@ -41,8 +47,9 @@
               $today = date('d/m/Y',strtotime("+2 hours"));;
               $yesterday = date('d/m/Y',strtotime("-22 hours"));
             @endphp
+            
             @foreach ($doses as $dose)
-            <tr>
+            <tr class="dose-row">
               <td>
                 @if (date('d/m/Y',strtotime($dose->date)) == $today)
                   Oggi, {{date('H:i', strtotime($dose->date))}}
@@ -65,11 +72,14 @@
             @endforeach
           </tbody>
         </table>
+        @if ($doses->isEmpty())
+              <p class="no-data-info">Ancora nessun dato</p>
+        @endif
         {{ $doses->links() }}        
       </section>
     </div>
 
-    {{-- ============CHART.JS SCRIPT================ --}}
+    {{-- ============AJAX + CHART.JS SCRIPT================ --}}
     <script>
 
       getStats();
@@ -105,13 +115,13 @@
                 data: {
                     labels: ['6 giorni fa', '5 giorni fa', '4 giorni fa', '3 giorni fa', '2 giorni fa', 'Ieri', 'Oggi'],
                     datasets: [{
-                        label: 'Assunzione caffeina (mg) | Ultimi 7 giorni',
+                        label: 'Assunzione caffeina (mg)',
                         data: lastWeeekDoses,
                         backgroundColor: [
-                            'rgba(255, 99, 132, 0.2)'
+                            '#DE6B4880'
                         ],
-                        
-                        borderWidth: 1
+                        pointBackgroundColor:  ['#DE6B48','#DE6B48','#DE6B48','#DE6B48','#DE6B48','#DE6B48','#DE6B48'],
+                        borderWidth: 0
                     }]
                 },
                 options: {

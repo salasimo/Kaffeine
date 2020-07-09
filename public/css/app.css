@@ -1,5 +1,13 @@
 @import url(https://fonts.googleapis.com/css?family=Nunito);@charset "UTF-8";
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Variables*/
+
 /*!
  * Bootstrap v4.5.0 (https://getbootstrap.com/)
  * Copyright 2011-2020 The Bootstrap Authors
@@ -10926,5 +10934,202 @@ a.text-dark:focus {
     color: inherit;
     border-color: #dee2e6;
   }
+}
+
+/*Common*/
+
+body {
+  background-color: #f5e0cc;
+}
+
+nav.navbar {
+  background-color: #de5b48 !important;
+}
+
+.btn-primary {
+  background-color: #de5b48;
+  border: 1px solid #de5b48;
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active {
+  background-color: #8a3419;
+  border: 1px solid #8a3419;
+}
+
+.btn-outline-danger {
+  color: #de5b48;
+  background-color: white;
+  border: 1px solid #de5b48;
+}
+
+.btn-outline-danger:hover {
+  background-color: #de5b48;
+  border: 1px solid #de5b48;
+}
+
+.pagination > li > a {
+  background-color: white;
+  color: #de5b48;
+}
+
+.pagination > li > a:hover {
+  color: #de5b48;
+}
+
+.pagination > .active > span {
+  background-color: #de5b48 !important;
+  border: 1px solid #de5b48 !important;
+}
+
+/*Home Page (index)*/
+
+#page-index {
+  text-align: center;
+}
+
+#page-index .titles-box {
+  background-color: white;
+  border-radius: 20px;
+  padding: 20px;
+}
+
+#page-index .btn-dashboard-box {
+  padding: 40px 0;
+}
+
+#page-index .instructions {
+  max-width: 660px;
+  margin: 0 auto;
+  margin-top: 40px;
+  padding: 10px;
+  border-radius: 20px;
+  background-color: white;
+  cursor: pointer;
+  color: #de5b48;
+}
+
+#page-index .instructions:hover {
+  color: #8a3419;
+}
+
+#page-index .instructions p.instructions-title {
+  font-weight: bold;
+  padding: 0;
+  margin: 0;
+  text-decoration: underline;
+}
+
+#page-index .instructions .instructions-body {
+  margin-top: 15px;
+}
+
+#page-index .instructions .instructions-body.hidden {
+  display: none;
+}
+
+#page-index .new-account-box {
+  background-color: white;
+  max-width: 360px;
+  margin: 0 auto;
+  padding: 30px;
+  border-radius: 20px;
+}
+
+/*Dashboard*/
+
+#page-dashboard .today-info-box {
+  max-width: 660px;
+  margin: 0 auto;
+}
+
+#page-dashboard .today-info-box .today-info {
+  text-align: center;
+  padding: 20px;
+  background-color: white;
+  border-radius: 20px;
+}
+
+#page-dashboard .today-info-box .today-info p {
+  padding: 0;
+  margin: 0;
+}
+
+#page-dashboard .today-info-box .today-info p.limit-ok {
+  color: green;
+}
+
+#page-dashboard .today-info-box .today-info p.limit-over {
+  color: red;
+}
+
+#page-dashboard .today-info-box .today-info span {
+  display: block;
+  font-size: 2em;
+}
+
+#page-dashboard .add-dose-box {
+  text-align: center;
+  padding: 20px;
+  background-color: white;
+  border-radius: 20px;
+  margin: 30px auto;
+  max-width: 660px;
+}
+
+#page-dashboard .canvas-box {
+  max-width: 660px;
+  margin: 0 auto;
+  margin-bottom: 30px;
+  background-color: white;
+  padding: 20px;
+  border-radius: 20px;
+}
+
+#page-dashboard .canvas-info-display {
+  display: none;
+  text-align: center;
+  border: 1px solid black;
+  color: black;
+  border-radius: 10px;
+  padding: 10px 20px;
+  margin: 0 auto;
+  opacity: 70%;
+  font-size: 13px;
+  margin-bottom: 30px;
+}
+
+#page-dashboard section.doses-table {
+  max-width: 660px;
+  margin: 0 auto;
+  background-color: white;
+  padding: 20px;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+#page-dashboard section.doses-table h4.title-table {
+  margin-top: 10px;
+}
+
+#page-dashboard section.doses-table .no-data-info {
+  text-align: center;
+}
+
+@media screen and (max-width: 667px) {
+  #page-dashboard .canvas-box {
+    display: none;
+  }
+
+  #page-dashboard .canvas-info-display {
+    display: block;
+  }
+}
+
+/*Create*/
+
+#page-create .selection-drink {
+  max-width: 400px;
 }
 

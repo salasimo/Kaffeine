@@ -20,11 +20,14 @@ class DashboardController extends Controller
      */
     public function index()
     {
+        $limit = 400;
         $userLogged = Auth::id();
         $doses = Dose::where('user_id', '=', $userLogged)->orderBy('date', 'DESC')->paginate(5);
         // $drinks = Drink::all();
         $todayDoses = Dose::where('user_id', '=', $userLogged)->where('date', Carbon::now('Europe/Rome')->format('d'));
-        return view('user.dashboard.index', ['doses' => $doses]);
+        $todayDose = Dose::where('user_id', $userLogged)->whereDate('date', Carbon::today('Europe/Rome'))->join('drinks', 'doses.drink_id', '=', 'drinks.id')->sum('amount');
+
+        return view('user.dashboard.index', ['doses' => $doses], compact('userLogged', 'todayDose', 'limit'));
     }
 
     /**

@@ -1,0 +1,44 @@
+#page-index {
+    text-align: center;
+    .titles-box {
+        background-color: white;
+        border-radius: 20px;
+        padding: 20px;
+    }
+    .btn-dashboard-box {
+        padding: 40px 0;
+    }
+    .instructions {
+        max-width: 660px;
+        margin: 0 auto;
+        margin-top: 40px;
+        padding: 10px;
+        border-radius: 20px;
+        background-color: white;
+        cursor: pointer;
+        color: $k-orange;
+        &:hover {
+            color: $k-orange-hover;
+        }
+
+        p.instructions-title {
+            font-weight: bold;
+            padding: 0;
+            margin: 0;
+            text-decoration: underline;
+        }
+        .instructions-body {
+            margin-top: 15px;
+        }
+        .instructions-body.hidden {
+            display: none;
+        }
+    }
+    .new-account-box {
+        background-color: white;
+        max-width: 360px;
+        margin: 0 auto;
+        padding: 30px;
+        border-radius: 20px;
+    }
+}
